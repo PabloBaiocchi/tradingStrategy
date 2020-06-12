@@ -16,14 +16,14 @@ class Player:
         self.stateHistory.append([self.cashStack,self.shares,self.randomWalk.currentValue()])
 
     def buyShares(self,amount):
-        self.cashStack=self.cashStack-self.randomWalk.currentValue*amount
+        self.cashStack=self.cashStack-self.randomWalk.currentValue()*amount
         self.shares=self.shares+amount
-        self.transactionHistory.append(['buy',amount,self.randomWalk.currentValue,len(self.randomWalk.history)-1])
+        self.transactionHistory.append(['buy',amount,self.randomWalk.currentValue(),len(self.randomWalk.history)-1])
 
     def sellShares(self,amount):
-        self.cashStack=self.cashStack+self.randomWalk.currentValue*amount
+        self.cashStack=self.cashStack+self.randomWalk.currentValue()*amount
         self.shares=self.shares-amount
-        self.transactionHistory.append(['sell',amount,self.randomWalk.currentValue,len(self.randomWalk.history)-1])
+        self.transactionHistory.append(['sell',amount,self.randomWalk.currentValue(),len(self.randomWalk.history)-1])
 
     def stateReport(self):
         if len(self.stateHistory)==0:
