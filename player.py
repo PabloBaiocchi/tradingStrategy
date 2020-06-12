@@ -2,13 +2,15 @@ import pandas as pd
 
 class Player:
 
-    def __init__(self,cashStack,shares,algorithm,randomWalk):
+    def __init__(self,cashStack,shares,algorithm,randomWalk,onStartUp=None):
         self.cashStack=cashStack
         self.shares=shares
         self.algorithm=algorithm
         self.randomWalk=randomWalk
         self.stateHistory=[]
         self.transactionHistory=[]
+        if onStartUp:
+            onStartUp(self)
 
     def marketTick(self):
         self.randomWalk.next()
