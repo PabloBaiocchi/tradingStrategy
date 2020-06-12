@@ -1,16 +1,18 @@
+import pandas as pd
+
 class Player:
 
     def __init__(self,cashStack,shares,algorithm,randomWalk):
         self.cashStack=cashStack
         self.shares=shares
-        self.algorithm
-        self.randomWalk
+        self.algorithm=algorithm
+        self.randomWalk=randomWalk
         self.stateHistory=[]
         self.transactionHistory=[]
 
     def marketTick(self):
         self.randomWalk.next()
-        self.algorithm(self,self.buyShares,self.sellShares,self.randomWalk)
+        self.algorithm(self)
         self.stateHistory.append([self.cashStack,self.shares,self.randomWalk.currentValue()])
 
     def buyShares(self,amount):
@@ -25,14 +27,14 @@ class Player:
 
     def stateReport(self):
         if len(self.stateHistory)==0:
-        return pd.DataFrame() 
+            return pd.DataFrame() 
         df=pd.DataFrame(self.stateHistory)
         df.columns=['cash','shares','share_price']
         return df
 
     def transactionReport(self):
         if len(self.transactionHistory)==0:
-        return pd.DataFrame()
+            return pd.DataFrame()
         df=pd.DataFrame(self.transactionHistory)
         df.columns=['transaction_type','share_quantity','share_price','time']
         return df
